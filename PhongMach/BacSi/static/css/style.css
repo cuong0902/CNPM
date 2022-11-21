@@ -1,0 +1,9 @@
+*{
+    font-family:tahoma;
+}
+body{
+    color: red;
+}
+h1.subject{
+    text-align:center;
+}
