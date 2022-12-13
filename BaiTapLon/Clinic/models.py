@@ -8,144 +8,77 @@ class BaseModel(db.Model):
     __abstract__ = True
     id = Column(Integer, primary_key=True, autoincrement=True)
 
+class UserRole(UserEnum):
+    ADMIN = 1
+    USER = 2
+    DOCTOR = 3
+    CASH = 4
+    NURSE = 5
 
-class Account(BaseModel):
+class User(BaseModel):
+    name = Column(String(50), nullable=False)
     username = Column(String(50), nullable=False, unique=True)
     password = Column(String(50), nullable=False)
     avatar = Column(String(100))
     email = Column(String(50))
     active = Column(Boolean, default=True)
     joined_date = Column(DateTime,default=datetime.now())
-
+    user_role = Column(Enum(UserRole), default=UserRole.USER)
     def __str__(self):
         return self.name
 
-
-
-class TaiKhoanAdmin(Account):
-    __tablename__= 'Account'
-    name = Column(String(50), nullable=False)
-    phone = Column(Integer, nullable=True)
-    def __str__(self):
-        return self.name
-
-class Bacsi(BaseModel):
-    __tablename__= 'Bác Sĩ'
-    admin_id = Column(Integer, ForeignKey(TaiKhoanAdmin.id), nullable=False)
-    def __str__(self):
-        return self.name
-
-class YTa(BaseModel):
-    __tablename__= 'Y Tá'
-    admin_id = Column(Integer, ForeignKey(TaiKhoanAdmin.id), nullable=False)
-    def __str__(self):
-        return self.name
-
-class ThuNgan(BaseModel):
-    __tablename__= 'Thu Ngân'
-    admin_id = Column(Integer, ForeignKey(TaiKhoanAdmin.id), nullable=False)
-    def __str__(self):
-        return self.name
-
-class QuanTri(BaseModel):
-    __tablename__= 'Quản Trị'
-    admin_id = Column(Integer, ForeignKey(TaiKhoanAdmin.id), nullable=False)
-    def __str__(self):
-        return self.name
-
-class TaiKhoanUser(Account):
-    __tablename__= 'User'
-    def __str__(self):
-        return self.name
-
-class DanhSachKham(BaseModel):
-    __tablename__ = 'Danh Sách Khám'
-    HoTen = Column(String(50), nullable=False)
-    NgayKham = Column(DateTime, default=datetime.now())
-    YTa_id = Column(Integer, ForeignKey(YTa.id), nullable=False)
-
-    def __str__(self):
-        return self.name
-
-class BenhNhan(BaseModel):
-    __tablename__= 'Bệnh Nhân'
+class Customer(BaseModel):
     name = Column(String(50), nullable=False)
     phone = Column(Integer, nullable=True)
     email = Column(String(100), nullable=False, unique=True)
-    DiaChi = Column(String(100), nullable=False)
-    id_user = Column(Integer, ForeignKey(TaiKhoanUser.id), nullable=False, unique=True)
-    lichkham_id = Column(Integer, ForeignKey(DanhSachKham.id), nullable=False, unique=True)
+    books = relationship('Books', cascade="all,delete", backref='customer', lazy=True)
+
     def __str__(self):
         return self.name
 
-class PhieuKham(BaseModel):
-    __tablename__= 'Phiếu Khám'
-    name = Column(String(50), nullable=False)
-    NgayKham = Column(DateTime, default=datetime.now())
-    TrieuChung = Column(String(500), nullable=False)
-    Bacsi_id = Column(Integer, ForeignKey(Bacsi.id), nullable=False)
-    def __str__(self):
-        return self.name
-
-class HoaDon(BaseModel):
-    __tablename__= 'Hóa Đơn'
-    NgayTao = Column(DateTime, default=datetime.now())
-    TienKham = Column(Float, nullable=False)
-    TienThuoc = Column(Float, nullable=False)
-    ThuNgan_id = Column(Integer, ForeignKey(ThuNgan.id), nullable=False)
-    Toa_Thuoc = relationship('ToaThuoc', backref='hoa don thuoc', lazy=True)
-    def __str__(self):
-        return self.name
-
-class Thuoc(BaseModel):
-    __tablename__= 'Thuốc'
-    name = Column(String(50), nullable=False)
-    NgaySanXuat = Column(DateTime, default=datetime.now())
-    DonVi = Column(String(500), nullable=False)
-    hoadon_id = Column(Integer, ForeignKey(HoaDon.id), nullable=False)
-    def __str__(self):
-        return self.name
-
-class ToaThuoc(BaseModel):
-    __tablename__= 'Toa Thuốc'
-    name = Column(String(50), nullable=False)
-    SoLuong = Column(Integer, nullable=False)
-    CachDung = Column(String(500), nullable=False)
-    Thuoc_id = Column(Integer, ForeignKey(Thuoc.id), nullable=False)
-    PhieuKham_id = Column(Integer, ForeignKey(PhieuKham.id), nullable=False)
-    def __str__(self):
-        return self.name
-
-class QuyDinh(BaseModel):
-    __tablename__ = 'Quy Dinh'
-    QuanTri_id = Column(Integer, ForeignKey(QuanTri.id), nullable=False)
-    name = Column(String(50), nullable=False)
-    LoaiQuyDinh = Column(String(100), nullable=False)
-    NoiDung = Column(String(500), nullable=False)
-    NgayQuyDinh = Column(DateTime, default=datetime.now())
-    NgayKetThuc = Column(DateTime, default=datetime.now())
+class Policy(BaseModel):
+    topic = Column(String(100), nullable=False)
+    content = Column(String(500), nullable=False)
+    value = Column(Float)
 
     def __str__(self):
         return self.topic
 
-class QuyDinhThuoc(BaseModel):
-    __tablename__ = 'Quy Dinh Thuoc'
-    Gia = Column(Integer, nullable=False)
-    Thuoc_id = Column(Integer, ForeignKey(Thuoc.id), nullable=False)
-    QuanTri_id = Column(Integer, ForeignKey(QuanTri.id), nullable=False)
+class Medicine(BaseModel):
+    name = Column(String(50), nullable=False)
+    unit = Column(String(10), nullable=False)
+    price = Column(Integer, nullable=False)
 
     def __str__(self):
         return self.name
 
+class Books(BaseModel):
+    booked_date = Column(DateTime, default=datetime.now())
+    customer_id = Column(Integer, ForeignKey(Customer.id,  onupdate="CASCADE", ondelete="CASCADE"), nullable=False)
 
-class HoSoBenhAn(BaseModel):
-    __tablename__= 'Hồ Sơ Bệnh Án'
-    HoTen = Column(String(50), nullable=False)
-    TienSuBenh = Column(String(500), nullable=False)
-    BenhNhan_id = Column(Integer, ForeignKey(BenhNhan.id), nullable=False)
     def __str__(self):
-        return self.name
+        return self.id
 
+
+class Receipt(db.Model):
+    id = Column(Integer, primary_key=True, autoincrement=True)
+    created_date = Column(DateTime, default=datetime.now())
+    status = Column(Integer, default=0)
+    details = relationship('ReceiptDetails', backref='receipt', lazy=True)
+
+    def __str__(self):
+        return self.id
+
+
+class ReceiptDetails(db.Model):
+    id = Column(Integer, primary_key=True, autoincrement=True)
+    receipt_id = Column(Integer, ForeignKey(Receipt.id), nullable=False)
+    medicine_id = Column(Integer, ForeignKey(Medicine.id), nullable=False)
+    quantity = Column(Integer, default=0)
+    unit_price = Column(Float, default=0)
+
+    def __str__(self):
+        return self.id
 
 if __name__ == '__main__':
     with app.app_context():
@@ -156,32 +89,30 @@ if __name__ == '__main__':
         #
         # db.session.add_all([c1, c2, c3])
         # db.session.commit()
-        # product = [{
+        # medicine = [{
         #          "id": 1,
-        #          "name": "iPhone 13 Pro Max",
-        #          "description": "Apple, 128GB, RAM: 6GB, iOS13",
-        #          "price": 17000000,
-        #          "image": "images/iphone-13-pro-xanh-xa-1.png",
-        #          "category_id": 1
+        #          "name": "Paracetamol",
+        #          "unit": "100",
+        #          "price": 12000,
+        #
         #         }, {
         #          "id": 2,
-        #          "name": "Oppo Reno 6 5G",
-        #          "description": "Oppo, 128GB, RAM: 6GB",
-        #          "price": 37000000,
-        #          "image": "images/oppo-reno6-den-1-org.png",
-        #          "category_id": 1
+        #          "name": "Alexan",
+        #          "unit": "78",
+        #          "price": 5000,
+        #
         #         }, {
         #          "id": 3,
-        #          "name": "Galaxy Tab A7s",
-        #          "description": "Samsung, 64GB, RAM: 6GB",
-        #          "price": 24000000,
-        #          "image": "images/samsung-galaxy-tab-a7-lite-1-3-org.png",
-        #          "category_id": 2
+        #          "name": "Betadine",
+        #          "unit": "65",
+        #          "price": 2400,
+        #
+        #
         #         }]
-        # for p in product:
-        #     pro = Product(name=p['name'], price=p['price'],
-        #                   description=p['description'],
-        #                   category_id=p['category_id'],
-        #                   image=p['image'])
-        #     db.session.add(pro)
+        # for m in medicine:
+        #     med = Medicine(name=m['name'],
+        #                    price=m['price'],
+        #                   unit=m['unit']
+        #                   )
+        #     db.session.add(med)
         # db.session.commit()

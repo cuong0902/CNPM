@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html>
+<head>
+
+<meta charset="UTF-8">
+<title>Trang chu</title>
+<link href="{{ url_for('static', filename='css/style.css') }}" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css"
+  integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+<script src="https://cdn.jsdelivr.net/npm/jquery@3.6.0/dist/jquery.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/js/bootstrap.bundle.min.js"></script>
+<style>
+    input[type=text], select {
+      width: 100%;
+      padding: 12px 20px;
+      margin: 8px 0;
+      display: inline-block;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+      box-sizing: border-box;
+    }
+    
+    input[type=submit] {
+      width: 100%;
+      background-color: #286ba6;
+      color: white;
+      padding: 14px 20px;
+      margin: 8px 0;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+    }
+    
+    input[type=submit]:hover {
+      background-color: #3597ec;
+    }
+    
+    .register {
+      border-radius: 5px;
+      background-color: #f2f2f2;
+      padding: 20px;
+      padding-top: 100px;
+      width: 80%;
+      margin: auto;
+    }
+    input[type=text]:focus {
+      border: 2px solid #555;
+    }
+    .register-content{
+        text-align: center;
+        font-size: 28px;
+        color: #286ba6;
+        margin-bottom: 10px;
+    }
+    input[type=date]{
+      width: 520.15px;
+      height: 50px;
+      border: 1px solid #ccc;
+    }
+     input[id=myLocalDate] {
+      width: 520.15px;
+      height: 50px;
+    }
+    .option{
+      width: 44%;
+      display: inline-block;
+      margin:0 28px;
+    }
+  
+    </style>
+</head>
+<body>
+
+    <!--Menu-->
+    <div class="menu">
+        <nav class="navbar navbar-expand-sm navbar-dark nav-customer">
+    
+          <!-- Brand/logo -->
+          <a class="navbar-brand" href="/">
+           CNT
+          </a>
+    
+          <!-- Links -->
+          <div class="d-flex justify-content-space-between">
+            <ul class="navbar-nav">
+              <li class="nav-item">
+                <a class="nav-link text-white" href="/">Trang Chu</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link text-white" href="#">Tin Tức</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link text-white" href="#">Danh Sách Bác Sĩ</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link text-white" href="#">Liên Hệ</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link text-white" href="#"> Hướng Dẫn Khách Hàng</a>
+              </li>
+              <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle text-white" href="#" id="navbardrop" data-toggle="dropdown">
+                  Dịch vụ
+                </a>
+                <div class="dropdown-menu">
+                  <a class="dropdown-item " href="register.html">Đăng kí khám</a>
+                  <a class="dropdown-item " href="#">Khám sức khỏe tổng quát</a>
+                  <a class="dropdown-item " href="#">Khám sàng lọc</a>
+                </div>
+              </li>
+            </ul>
+          </div>
+          <!--Begin Search button-->
+          <ul class="navbar-nav ">
+            <form class="form-inline" action="/action_page.php">
+              <input class="form-control mr-sm-2" type="search" placeholder="Search">
+              <button class="btn btn-success" type="search">Search</button>
+            </form>
+          </ul>
+          <!--End Search button-->
+          <p class="btn-dk">
+            <a class="nav-link text-white" href="register.html"><b>ĐĂNG KÝ KHÁM</b> </a>
+          </p>
+    </nav>
+    </div>
+    
+
+<!--Đặt lịch-->
+<div class="register">
+    <h1 class="register-content">Đặt Lịch Khám</h1>
+  <form action="/action_page.php">
+    <div class="option">
+    <label for="fname">Họ và Tên</label>
+    <input type="text" id="fname" name="fullname" placeholder="Họ và tên..">
+    </div>
+
+    <div class="option">
+      <label for="sex">Giới tính</label>
+      <select id="sex" name="sex">
+        <option value="nam">Nam</option>
+        <option value="nu">Nữ</option>
+        <option value="khac">Khác</option>
+      </select>
+    </div>
+
+    <div class="option">
+      <label for="date">Ngày sinh</label><br>
+    <input type="date" id="myDate" value="2022-03-12">
+    <script>
+        function myFunction() {
+        var x = document.getElementById("myDate").value;
+         document.getElementById("demo").innerHTML = x;
+        }
+    </script>
+    <br>
+    </div>
+
+    <div class="option">
+      <label for="address">Địa chỉ</label>
+    <input type="text" id="address" name="address" placeholder="Địa chỉ..">
+    </div>
+
+    <div class="option">
+      <label for="phone">Số điện thoại</label>
+    <input type="text" id="phone" name="phone" placeholder="Số điện thoại..">
+    </div>
+
+   <div class="option">
+    <label for="email">Email</label>
+    <input type="text" id="mail" name="email" placeholder="Email">
+   </div>
+
+
+   <div class="option">
+    <label for="date">Thời gian khám</label><br>
+      <input type="datetime-local" id="myLocalDate" value="">
+    <p id="demo"></p>
+    <script>
+    function myFunction() {
+      var x = document.getElementById("myLocalDate").value;
+      document.getElementById("demo").innerHTML = x;
+      }
+    </script>
+    <br>
+
+   </div>
+
+
+
+    <input type="submit" value="Submit">
+  </form>
+</div>
+
+</body>
+</html>
+

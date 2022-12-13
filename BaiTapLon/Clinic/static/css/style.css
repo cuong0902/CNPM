@@ -19,3 +19,67 @@ h1.subject{
 .flex{
     display: flex;
 }
+style.css
+.bg-dark{
+background-color: #286ba6 !important;
+}
+
+.menu{
+    background-color: #286ba6;
+    position: fixed;
+    width: 100%;
+    z-index: 1;
+    margin-top: 0;
+}
+
+.btn-dk{
+    margin: 5px;
+}
+.infor{
+    margin-left: 220px;
+    margin-top: 20px;
+    width: 720px;
+    height: 50%;
+
+}
+.infor h1{
+    color: #286ba6;
+}
+
+.container .card .card-body{
+    display: inline-block;
+    margin: 20px ;
+}
+.footer {
+    background-color:#286ba6;
+    color:white;
+    margin-top: 40px;
+    padding: 10px;
+}
+.privacy-policy{
+    margin-top: 10px;
+}
+
+.footer-menu_list li{
+    list-style-type: none;
+}
+.footer-menu_list a{
+    color: white;
+}
+.footer-menu_list{
+    margin: 12px;
+    padding: 0;
+}
+.footer-menu{
+    display: flex;
+    padding:10px 184px;
+}
+.card{
+    margin: 10px;
+}
+.card .btn {
+    background-color: #286ba6;
+}
+.container .card{
+    display: inline-block;
+}

@@ -1,10 +1,194 @@
-{% extends 'layout/base.html' %}
-{% block title %} Trang Chu {% endblock %}
 
-{% block content %}
-<h1 class="subject">Chào Mừng Đến Với Phòng Khám</h1>
+<!DOCTYPE html>
+<html lang="en">
 
+<head>
+  <meta charset="UTF-8">
+  <title>Trang chu</title>
+  <link href="{{ url_for('static', filename='css/style.css') }}" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css"
+    integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+  <script src="https://cdn.jsdelivr.net/npm/jquery@3.6.0/dist/jquery.slim.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/js/bootstrap.bundle.min.js"></script>
+  <style>
+    /* Make the image fully responsive */
+    .carousel-inner img {
+      width: 100%;
+      height: 100%;
+    }
+  </style>
+</head>
 
+<body>
+  <div class="menu">
+    <nav class="navbar navbar-expand-sm navbar-dark nav-customer">
 
+      <!-- Brand/logo -->
+      <a class="navbar-brand" href="/">
+       CTN
+      </a>
 
-{% endblock %}
+      <!-- Links -->
+      <div class="d-flex justify-content-space-between">
+        <ul class="navbar-nav">
+          <li class="nav-item">
+            <a class="nav-link text-white" href="/">Trang Chu</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link text-white" href="#">Tin Tức</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link text-white" href="#">Danh Sách Bác Sĩ</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link text-white" href="{{url_for('about_us')}}">Liên Hệ</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link text-white" href="#"> Hướng Dẫn Khách Hàng</a>
+          </li>
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle text-white" href="#" id="navbardrop" data-toggle="dropdown">
+              Dịch vụ
+            </a>
+            <div class="dropdown-menu">
+              <a class="dropdown-item " href="#">Đăng kí khám</a>
+              <a class="dropdown-item " href="#">Khám sức khỏe tổng quát</a>
+              <a class="dropdown-item " href="#">Khám sàng lọc</a>
+            </div>
+          </li>
+        </ul>
+      </div>
+      <!--Begin Search button-->
+      <ul class="navbar-nav ">
+        <form class="form-inline" action="/action_page.php">
+          <input class="form-control mr-sm-2" type="search" placeholder="Search">
+          <button class="btn btn-success" type="search">Search</button>
+        </form>
+      </ul>
+      <!--End Search button-->
+      <p class="btn-dk">
+        <a class="nav-link text-white" href="{{ url_for('register_cus') }}"><b>ĐĂNG KÝ KHÁM</b> </a>
+      </p>
+</body>
+
+</nav>
+</div>
+
+<!-- CAROUSEL -->
+<div id="demo" class="carousel slide" data-ride="carousel">
+
+  <!-- Indicators -->
+  <ul class="carousel-indicators">
+    <li data-target="#demo" data-slide-to="0" class="active"></li>
+    <li data-target="#demo" data-slide-to="1"></li>
+    <li data-target="#demo" data-slide-to="2"></li>
+  </ul>
+
+  <!-- The slideshow -->
+  <div class="carousel-inner">
+    <div class="carousel-item active">
+      <img src="http://bvbinhdan.com.vn/vnt_upload/weblink/slide.jpg" alt="#" width="1100" height="320">
+    </div>
+    <div class="carousel-item">
+      <img src="http://bvbinhdan.com.vn/vnt_upload/weblink/2-BVBD-BannerWebsite_CSKH_1440x510_RS.jpg" alt="#" width="1100" height="320">
+    </div>
+    <div class="carousel-item">
+      <img src="http://bvbinhdan.com.vn/vnt_upload/weblink/4-BVBD-BannerWebsite_TQ_Nieu_1440x510_RS.jpg" alt="#" width="1100" height="320">
+    </div>
+  </div>
+
+  <!-- Left and right controls -->
+  <a class="carousel-control-prev" href="#demo" data-slide="prev">
+    <span class="carousel-control-prev-icon"></span>
+  </a>
+  <a class="carousel-control-next" href="#demo" data-slide="next">
+    <span class="carousel-control-next-icon"></span>
+  </a>
+</div>
+
+<div class="infor">
+  <h1>Đội Ngũ Bác Sĩ</h1>
+<p> Quy tụ đội ngũ chuyên gia, bác sĩ, dược sĩ và điều dưỡng được đào tạo bài bản đến chuyên sâu tại Việt nam và nhiều
+  nước có nên y học phát triển như Mỹ, Anh, Pháp... Luôn lấy người bệnh là trung tâm, cam kết mang lại dịch vụ chăm sóc
+  sức khỏe toàn diện và chất lượng cao cho khách hàng.
+</p>
+</div>
+<!--Begin Infor Doctors-->
+<div class="container">
+  <div class="card" style="width:240px">
+    <img class="card-img-bottom" src="https://vinmec-prod.s3.amazonaws.com/images/23_04_2022_09_04_54_911772.png" alt="Card image" style="width:100%">
+    <div class="card-body">
+      <h4 class="card-title">TRẦN HOÀNG NGỌC ANH</h4>
+      <p class="card-text">TS. BS. Trần Hoàng Ngọc Anh là phó bộ môn Phẫu thuật Thần kinh Đại học Y dược TP. HCM, Phó trưởng khoa Ngoại thần kinh Bệnh viện Nhân Dân Gia Định.</p>
+      <a href="#" class="btn btn-primary">Xem thông tin</a>
+    </div>
+  </div>
+
+  <div class="card" style="width:240px">
+    <img class="card-img-bottom" src="https://vinmec-prod.s3.amazonaws.com/images/17_06_2021_04_28_12_077298.png" alt="Card image" style="width:100%">
+    <div class="card-body">
+    <h4 class="card-title">KELLY M.SMITH</h4>
+    <p class="card-text">Phó giáo sư, Bác sĩ Kelly có 17 năm kinh nghiệm trong lĩnh vực Ung bướu-Xạ trị-Huyết học, chuyên gia trong việc chẩn đoán, điều trị, tầm soát ung thư</p>
+    <a href="#" class="btn btn-primary">Xem thông tin</a>
+    </div>
+</div>
+
+  <div class="card" style="width:240px">
+      <img class="card-img-bottom" src="https://vinmec-prod.s3.amazonaws.com/images/11_11_2021_10_26_00_352086.png" alt="Card image" style="width:100%">
+      <div class="card-body">
+      <h4 class="card-title">TRẦN TRUNG DŨNG</h4>
+      <p class="card-text">GS. TS. BS Trần Trung Dũng là người đi tiên phong trong thực hiện các phẫu thuật bảo tồn ứng dụng công nghệ 3D cá thể hóa trong ung thư xương tại Việt Nam</p>
+      <a href="#" class="btn btn-primary">Xem thông tin</a>
+      </div>
+  </div>
+
+  <div class="card" style="width:240px">
+      <img class="card-img-bottom" src="https://vinmec-prod.s3.amazonaws.com/images/17_06_2021_04_28_34_007696.png" alt="Card image" style="width:100%">
+      <div class="card-body">
+      <h4 class="card-title">YI HYEON GYU</h4>
+      <p class="card-text">22 năm kinh nghiệm làm việc trong lĩnh vực Ung bướu - Huyết học, chuyên sâu về điều trị các loại U đặc, các bệnh huyết học ác tính và các bệnh huyết học lành tính </p>
+      <a href="#" class="btn btn-primary">Xem thông tin</a>
+    </div>
+  </div>
+</div>
+<!--End Infor Doctors-->
+<div class="footer">
+<div class="footer-upper">
+  <div class="container">
+    <div class="footer-subscribe email-subscribe">
+      <h3>Theo dõi tin tức và dịch vụ mới nhất của chúng tôi!</h3>
+      <div class="subscribe-area">
+        <input type="text" name="subscribe" placeholder="Địa chỉ email" class="subcribe-input">
+        <button type="button" class="btn-subscribe bg-white" id="subscribe-submit" data-action="/vi/danh-sach/subscribe"
+          data-csrf="">ĐĂNG KÝ</button>
+      </div>
+      <div class="email-error error"></div>
+      <div class="privacy-policy">
+         <span>
+          Bằng cách nhấn nút Đăng ký <br> Tôi xác nhận đã đọc và đồng ý với các Quy định <a
+            href="/vi/chinhsachquyenriengtu/"><b style="color:black">Chính sách quyền riêng tư</b></a>
+        </span>
+      </div>
+
+    </div>
+  </div>
+  <div class="footer-menu">
+    <ul class="footer-menu_list">
+      <h3>Về chúng tôi</h3>
+      <li><a href="/danh-sach/bac-si/">Đội ngũ bác sĩ</a></li>
+      <li><a href="/vi/tin-tuc/">Tin tức</a></li>
+      <li><a href="/tuyen-dung/">Tuyển dụng</a></li>
+      <li><a href="/vi/chinhsachquyenriengtu/"> Chính sách quyền riêng tư</a></li>
+    </ul>
+    <ul class="footer-menu_list">
+      <h3>Dịch vụ </h3>
+      <li><a href="/gioi-thieu/">Giới thiệu</a></li>
+      <li><a href="/dangkykham/">Đăng ký khám và tư vấn</a></li>
+      <li><a href="/goi-dich-vu/">Gói dịch vụ</a></li>
+      <li><a href="/huong-dan-khach-hang/">Hướng dẫn khách hàng</a></li>
+    </ul>
+  </div>
+</div>
+</div>
+</html>
